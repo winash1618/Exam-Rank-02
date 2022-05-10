@@ -1,27 +1,44 @@
 #include <unistd.h>
 #include <stdio.h>
 
+void print(int k)
+{
+	char mod;
+	if (k)
+	{
+		mod = '0' + k % 10;
+		k = k / 10;
+		print(k);
+		write (1, &mod, 1);
+	}
+
+}
+
 void print_num(int k)
 {
 	char  mod;
-	if (k)
+
+	if (k == 0)
+		write (1, "0", 1);
+	if (k < 0)
 	{
-		mod = k % 10 + '0';
-		k = k / 10;
-		print_num(k);
+		k = -k;
+		write (1, "-", 1);
 	}
-	else
-		write (1, &mod, 1);
+	if (k)
+		print(k);
 }
 
 int get_num(char *num)
 {
 	int i;
+	int sign;
 	
-	i = 1;
+	i = 0;
+	sign = 1;
 	if (*num == '-')
 	{
-		i = -i;
+		sign = -1;
 		num++;
 	}
 	while (*num)
@@ -29,7 +46,7 @@ int get_num(char *num)
 		i = i * 10 + (*num - '0');
 		num++;
 	}
-	return (i);
+	return (i * sign);
 }
 
 void do_mod(char *num1, char *num2)
