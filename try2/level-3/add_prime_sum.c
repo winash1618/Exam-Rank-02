@@ -5,7 +5,7 @@
 int is_prime(int num)
 {
 	int i = 1;
-	
+
 	if ( num == 2)
 		return (1);
 	while (++i < num)
@@ -19,6 +19,7 @@ int is_prime(int num)
 void print_sum(int sum)
 {
 	char c;
+
 	if (sum > 9)
 	{
 		c = sum % 10 + '0';
